@@ -95,51 +95,55 @@ const ReelFeed = ({ items = [], onLike, onSave, emptyMessage = 'No videos yet.' 
 
         {items.map((item) => (
           <section key={item._id} className="reel" role="listitem">
-            <video
-              ref={setVideoRef(item._id)}
-              className="reel-video"
-              src={item.video}
-              muted
-              playsInline
-              loop
-              preload="metadata"
-            />
-
-            <div className="reel-overlay">
-              <div className="reel-overlay-gradient" aria-hidden="true" />
-              <div className="reel-actions">
-                <div className="reel-action-group">
-                  <button
-                    onClick={onLike ? () => onLike(item) : undefined}
-                    className="reel-action"
-                    aria-label="Like"
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-8.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
-                    </svg>
-                  </button>
-                  <div className="reel-action__count">{item.likeCount ?? item.likesCount ?? item.likes ?? 0}</div>
-                </div>
-
-                <div className="reel-action-group">
-                  <button
-                    className="reel-action"
-                    onClick={onSave ? () => onSave(item) : undefined}
-                    aria-label="Bookmark"
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z" />
-                    </svg>
-                  </button>
-                  <div className="reel-action__count">{item.savesCount ?? item.bookmarks ?? item.saves ?? 0}</div>
-                </div>
+            <div className="reel-inner">
+              <div className="reel-media">
+                <video
+                  ref={setVideoRef(item._id)}
+                  className="reel-video"
+                  src={item.video}
+                  muted
+                  playsInline
+                  loop
+                  preload="metadata"
+                />
               </div>
 
-              <div className="reel-content">
-                <p className="reel-description" title={item.description}>{item.description}</p>
-                {item.foodPartner && (
-                  <Link className="reel-btn" to={"/food-partner/" + item.foodPartner} aria-label="Visit store">Visit store</Link>
-                )}
+              <div className="reel-side">
+                <div className="reel-overlay-gradient" aria-hidden="true" />
+                <div className="reel-actions">
+                  <div className="reel-action-group">
+                    <button
+                      onClick={onLike ? () => onLike(item) : undefined}
+                      className="reel-action"
+                      aria-label="Like"
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-8.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                      </svg>
+                    </button>
+                    <div className="reel-action__count">{item.likeCount ?? item.likesCount ?? item.likes ?? 0}</div>
+                  </div>
+
+                  <div className="reel-action-group">
+                    <button
+                      className="reel-action"
+                      onClick={onSave ? () => onSave(item) : undefined}
+                      aria-label="Bookmark"
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z" />
+                      </svg>
+                    </button>
+                    <div className="reel-action__count">{item.savesCount ?? item.bookmarks ?? item.saves ?? 0}</div>
+                  </div>
+                </div>
+
+                <div className="reel-content">
+                  <p className="reel-description" title={item.description}>{item.description}</p>
+                  {item.foodPartner && (
+                    <Link className="reel-btn" to={"/food-partner/" + item.foodPartner} aria-label="Visit store">Visit store</Link>
+                  )}
+                </div>
               </div>
             </div>
           </section>

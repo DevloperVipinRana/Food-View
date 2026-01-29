@@ -38,7 +38,7 @@
 }
 
 /* Overlay: content sits on top of video */
-.reel-overlay {
+.reel-side {
   position: absolute;
   inset: 0;
   display: flex;
@@ -117,6 +117,69 @@
   flex-direction: column;
   gap: 14px;
   pointer-events: auto;
+}
+
+/* New layout wrapper for desktop: media query will override mobile defaults */
+.reel-inner { height: 100dvh; }
+.reel-media { position: relative; height: 100%; }
+
+@media (min-width: 1024px) {
+  /* Center feed and give each reel a two-column layout: media + side panel */
+  .reels-feed { display: grid; place-items: center; }
+
+  .reel { height: 100dvh; display: grid; place-items: center; }
+
+  .reel-inner {
+    width: min(1200px, 98%);
+    height: calc(100dvh - 20px);
+    display: grid;
+    grid-template-columns: minmax(360px, 780px) 360px;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  /* Make video contained, centered and not absolutely positioned on desktop */
+  .reel-video {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-height: calc(100dvh - 120px);
+    object-fit: contain;
+    border-radius: 12px;
+    background: #000;
+  }
+
+  /* Side panel becomes a column (not overlay) */
+  .reel-side {
+    position: relative;
+    inset: auto;
+    height: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    pointer-events: auto;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Center video within media column so side content lines up */
+  .reel-media { display: flex; align-items: center; justify-content: center; }
+
+  .reel-overlay-gradient { display: none; }
+
+  .reel-actions { position: static; flex-direction: column; gap: 20px; align-self: center; }
+
+  .reel-action { width: 56px; height: 56px; }
+
+  .reel-content { padding: 0; padding-top: 24px; max-width: 340px; }
+
+  .reel-description { font-size: 1rem; max-width: 40ch; }
+
+  .reel-btn { align-self: stretch; text-align: center; }
 }
 
 .reel-action {
