@@ -7,8 +7,12 @@ const foodPartnerRoutes = require('./routes/food-partner.routes');
 const cors = require('cors');
 
 const app = express();
+const allowedOrigins = process.env.FRONTEND_ORIGINS
+    ? process.env.FRONTEND_ORIGINS.split(",").map(u => u.trim())
+    : ["https://food-view-beta.vercel.app", "http://localhost:5173"];
+
 app.use(cors({
-    origin: ["https://food-view-beta.vercel.app", "http://localhost:5173"],
+    origin: allowedOrigins,
     credentials: true
 }));
 app.use(cookieParser());
