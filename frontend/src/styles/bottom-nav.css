@@ -21,6 +21,13 @@
   grid-template-columns: 1fr 1fr;
 }
 
+@media (min-width: 1024px) {
+  .bottom-nav__inner {
+    max-width: min(500px, 98%);
+    margin-right: 46.5%;
+  }
+}
+
 .bottom-nav__item {
   display: flex;
   flex-direction: column;
